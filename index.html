@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interest News | Curated Stories</title>
+  <meta name="description" content="Personalized news aggregator with premium features" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="logo-bracket">[</span>
+      <h1>Interest News</h1>
+      <span class="logo-bracket">]</span>
+    </div>
+    <nav>
+      <a href="index.html" class="active" aria-current="page">Home</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h2>Curate Your Reality</h2>
+        <p class="hero-subtitle">Free users: <span class="highlight">3 interests</span>. Premium: <span class="highlight-gold">Unlimited</span>.</p>
+        <button id="premiumBtn" class="cta-btn" type="button" aria-expanded="false" aria-controls="premiumFormSec">
+          <span class="btn-text">Become a Premium User</span>
+          <span class="btn-icon">+</span>
+        </button>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb"></div>
+      </div>
+    </section>
+
+    <section id="premiumFormSec" class="hidden" aria-labelledby="premium-heading">
+      <div class="form-container">
+        <div class="form-header">
+          <h3 id="premium-heading">Premium Registration</h3>
+          <button type="button" id="closePremium" class="close-btn" aria-label="Close form">×</button>
+        </div>
+        <form id="premiumForm" novalidate>
+          <div class="form-group">
+            <label for="pName">Full Name <span aria-label="required">*</span></label>
+            <input type="text" id="pName" name="pName" required pattern="[A-Za-z\s]{2,50}" placeholder="Jane Doe" autocomplete="name" />
+            <span class="error" role="alert"></span>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="pAge">Age <span aria-label="required">*</span></label>
+              <input type="number" id="pAge" name="pAge" required min="13" max="120" placeholder="18" />
+              <span class="error" role="alert"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="pSex">Sex <span aria-label="required">*</span></label>
+              <select id="pSex" name="pSex" required>
+                <option value="">-- Select --</option>
+                <option value="Female">Female</option>
+                <option value="Male">Male</option>
+                <option value="Non-binary">Non-binary</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+              <span class="error" role="alert"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="pEmail">Email <span aria-label="required">*</span></label>
+            <input type="email" id="pEmail" name="pEmail" required placeholder="you@example.com" autocomplete="email" />
+            <span class="error" role="alert"></span>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="submit-btn">Activate Premium</button>
+          </div>
+        </form>
+        <div id="premSuccess" class="success-state hidden">
+          <div class="success-icon">✓</div>
+          <p>Premium activated! You can now follow unlimited stories.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEW: Search and Categories -->
+    <section class="controls-section">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search any topic (e.g., AI, Bitcoin, Space...)" />
+        <button id="searchBtn" class="search-btn">Search</button>
+      </div>
+      
+      <div class="categories">
+        <button class="cat-btn active" data-cat="technology">Technology</button>
+        <button class="cat-btn" data-cat="sports">Sports</button>
+        <button class="cat-btn" data-cat="business">Business</button>
+        <button class="cat-btn" data-cat="science">Science</button>
+        <button class="cat-btn" data-cat="health">Health</button>
+        <button class="cat-btn" data-cat="entertainment">Entertainment</button>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="news-heading">
+      <div class="tab-nav" role="tablist" aria-label="News categories">
+        <button class="tab-btn active" data-tab="all" role="tab" aria-selected="true" id="tab-all" aria-controls="all">All News</button>
+        <button class="tab-btn" data-tab="liked" role="tab" aria-selected="false" id="tab-liked" aria-controls="liked">Interested <span id="interestCount" class="badge">0</span></button>
+      </div>
+
+      <div id="all" class="tab-content active" role="tabpanel" aria-labelledby="tab-all">
+        <div class="grid" id="allGrid">
+          <div class="loading-state">
+            <div class="skeleton-card" aria-hidden="true"></div>
+            <div class="skeleton-card" aria-hidden="true"></div>
+            <div class="skeleton-card" aria-hidden="true"></div>
+            <div class="skeleton-card" aria-hidden="true"></div>
+            <div class="skeleton-card" aria-hidden="true"></div>
+            <div class="skeleton-card" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div id="loadMoreContainer" style="text-align: center; margin-top: 2rem; display: none;">
+          <button id="loadMoreBtn" class="submit-btn">Load More News</button>
+        </div>
+      </div>
+
+      <div id="liked" class="tab-content" role="tabpanel" aria-labelledby="tab-liked" hidden>
+        <div class="grid" id="likedGrid">
+          <div class="empty-state">
+            <p>No interests saved yet.</p>
+            <p class="empty-subtitle">Browse "All News" and click "Interested" to save stories.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <p>&copy; 2026 Interest News</p>
+      <p class="student-note">Built for Introduction to Web Development</p>
+    </div>
+  </footer>
+
+  <div class="toast-container" role="region" aria-live="polite" aria-label="Notifications"></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
