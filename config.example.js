@@ -1,1 +1,1 @@
-const NEWS_API_KEY = "pub_XXXXXXXXXXXXXXXXXXXXXXXX"
+const NEWS_API_KEY = "put your api key here";
