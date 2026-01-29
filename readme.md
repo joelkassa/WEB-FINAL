@@ -18,9 +18,9 @@ A personalized news aggregator that allows users to follow specific topics of in
 
 # Technologies Used
 
-**Html**: basic structure
-**CSS**: styling
-**JavaScript**: main logic 
+- **Html**: basic structure
+- **CSS**: styling
+- **JavaScript**: main logic 
 
 # How to Run the Project
 
