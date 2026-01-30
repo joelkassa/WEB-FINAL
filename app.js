@@ -185,7 +185,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
   });
 });
 
-/* ===== NEWS FETCHING ===== */
+/* fetch */
 async function fetchNews(append = false) {
   if (!append) {
     showSkeletons();
@@ -274,7 +274,7 @@ function renderCards(articles) {
     card.className = 'card';
     
     const isLiked = likedIds.has(art.link);
-    
+    //the news being fetched will be converted to normal text for safety
     card.innerHTML = `
       <h3>${escapeHtml(art.title)}</h3>
       <p>${escapeHtml(art.description || 'No description available.')}</p>
@@ -475,7 +475,7 @@ function showToast(message, type = 'success') {
   }, 3000);
 }
 
-/*main function (DOM is document object model - the html is the clueprint and the js file makes it interactive)*/
+/*main function (DOM is document object model - the html is the blueprint and the js file makes it interactive)*/
 document.addEventListener('DOMContentLoaded', () => {
   fetchNews();
   renderLiked();
